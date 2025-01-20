@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import "./css/Veriarvot.css";
+import "../css/Veriarvot.css";
 
 function Veriarvot({ language }) {
     const columns = [

@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/ConfirmationPopup.css";
+import "../css/ConfirmationPopup.css";
 
 function ConfirmationPopup({ message, onConfirm, onCancel }) {
     return (

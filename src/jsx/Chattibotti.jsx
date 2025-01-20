@@ -11,7 +11,7 @@ import {
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ConfirmationPopup from "./ConfirmationPopup";
-import "./css/Chattibotti.css";
+import "../css/Chattibotti.css";
 
 function ChatWindow({ language, setLanguage, theme, setTheme }) {
     const navigate = useNavigate();
