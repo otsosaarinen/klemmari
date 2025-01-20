@@ -182,11 +182,11 @@ function Veriarvot({ language }) {
                     initialState={{
                         pagination: {
                             paginationModel: {
-                                pageSize: 8,
+                                pageSize: 10,
                             },
                         },
                     }}
-                    pageSizeOptions={[8]}
+                    pageSizeOptions={[10]}
                     checkboxSelection
                     disableRowSelectionOnClick
                 />
