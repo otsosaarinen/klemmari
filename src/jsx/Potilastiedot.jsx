@@ -83,7 +83,7 @@ function Potilastiedot({ language }) {
             </h1>
             <Box
                 sx={{
-                    height: 400,
+                    height: 500,
                     width: "80%",
                     backgroundColor: "white",
                 }}
@@ -94,11 +94,11 @@ function Potilastiedot({ language }) {
                     initialState={{
                         pagination: {
                             paginationModel: {
-                                pageSize: 5,
+                                pageSize: 10,
                             },
                         },
                     }}
-                    pageSizeOptions={[5]}
+                    pageSizeOptions={[10]}
                     checkboxSelection
                     disableRowSelectionOnClick
                     onRowClick={(params) => handleRowClick(params.row)}
