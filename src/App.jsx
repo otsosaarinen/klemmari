@@ -5,7 +5,7 @@ import Potilastiedot from "./Potilastiedot";
 import Chattibotti from "./Chattibotti";
 import Asetukset from "./Asetukset";
 import KayntiTiedot from "./KayntiTiedot";
-import "./App.css";
+import "./css/App.css";
 
 function Home({ language }) {
     let date = new Date().toLocaleDateString();
