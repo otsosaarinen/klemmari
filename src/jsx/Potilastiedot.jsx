@@ -48,17 +48,17 @@ function Potilastiedot({ language }) {
         {
             id: 5,
             Käynti: language === "fi" ? "Ortopedia" : "Orthopedics",
-            Päivämäärä: "15.11.2024",
+            Päivämäärä: "16.11.2024",
         },
         {
             id: 6,
             Käynti: language === "fi" ? "Ortopedia" : "Orthopedics",
-            Päivämäärä: "15.11.2024",
+            Päivämäärä: "17.11.2024",
         },
         {
             id: 7,
             Käynti: language === "fi" ? "Ortopedia" : "Orthopedics",
-            Päivämäärä: "15.11.2024",
+            Päivämäärä: "18.11.2024",
         },
     ];
 
