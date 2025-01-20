@@ -93,13 +93,19 @@ const kaynnit = [
     },
 ];
 
-function KayntiTiedot() {
+function KayntiTiedot({ language }) {
     const { id } = useParams();
 
     const kaynti = kaynnit.find((item) => item.id.toString() === id);
 
     if (!kaynti) {
-        return <p>Tietoja ei löytynyt.</p>;
+        return (
+            <p>
+                {language === "fi"
+                    ? "Tietoja ei löytynyt."
+                    : "Information not found"}
+            </p>
+        );
     }
 
     return (
