@@ -2,11 +2,11 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import "../css/Potilastiedot.css";
 
 function Potilastiedot({ language }) {
     const navigate = useNavigate();
 
-    // Define columns with dynamic language support
     const columns = [
         { field: "id", headerName: language === "fi" ? "ID" : "ID", width: 90 },
         {
@@ -23,7 +23,6 @@ function Potilastiedot({ language }) {
         },
     ];
 
-    // Rows stay the same since they are patient-specific, but you can also translate them if needed
     const rows = [
         {
             id: 1,
@@ -68,26 +67,11 @@ function Potilastiedot({ language }) {
     };
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                height: "100vh",
-                textAlign: "center",
-            }}
-        >
+        <div className="potilastiedot-container">
             <h1>
                 {language === "fi" ? "Potilastiedot" : "Patient Information"}
             </h1>
-            <Box
-                sx={{
-                    height: 500,
-                    width: "80%",
-                    backgroundColor: "white",
-                }}
-            >
+            <Box className="data-grid-container">
                 <DataGrid
                     rows={rows}
                     columns={columns}
