@@ -5,6 +5,7 @@ import Potilastiedot from "./Potilastiedot";
 import Chattibotti from "./Chattibotti";
 import Asetukset from "./Asetukset";
 import KayntiTiedot from "./KayntiTiedot";
+import ChatWindow from "./Chattibotti";
 import "../css/App.css";
 
 function Home({ language }) {
@@ -42,9 +43,6 @@ function App() {
                 <Link to="/Potilastiedot">
                     {language === "fi" ? "Potilastiedot" : "Patient Info"}
                 </Link>
-                <Link to="/Chattibotti">
-                    {language === "fi" ? "Chattibotti" : "Chatbot"}
-                </Link>
                 <Link to="/Asetukset">
                     {language === "fi" ? "Asetukset" : "Settings"}
                 </Link>
@@ -60,17 +58,7 @@ function App() {
                     path="/Potilastiedot"
                     element={<Potilastiedot language={language} />}
                 />
-                <Route
-                    path="/Chattibotti"
-                    element={
-                        <Chattibotti
-                            language={language}
-                            setLanguage={setLanguage}
-                            theme={theme}
-                            setTheme={setTheme}
-                        />
-                    }
-                />
+                <Route />
                 <Route
                     path="/Asetukset"
                     element={
@@ -87,6 +75,15 @@ function App() {
                     element={<KayntiTiedot language={language} />}
                 />
             </Routes>
+
+            <div className="chatbot-container">
+                <ChatWindow
+                    language={language}
+                    setLanguage={setLanguage}
+                    theme={theme}
+                    setTheme={setTheme}
+                />
+            </div>
         </div>
     );
 }

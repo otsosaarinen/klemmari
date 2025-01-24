@@ -1,15 +1,21 @@
 .kaynti-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    margin: 20px auto;
+    width: 60%;
+    margin: 100px 100px;
     text-align: left;
+    position: relative;
+}
+
+.page-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
 }
 
 .kaynti-title {
