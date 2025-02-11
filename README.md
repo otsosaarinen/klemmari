@@ -5,7 +5,7 @@
 
 ## How to Run
 1. Install the latest LTS version of Node.js from the [official website](https://nodejs.org/en).
-2. Clone the repository to your local machine
+2. Clone the repository to your local machine.
 3. Navigate to the project directory and install the dependencies for the frontend:
     ```bash
     npm install
