@@ -2,9 +2,28 @@ import { useEffect } from "react";
 import "../css/App.css";
 
 function Asetukset({ language, setLanguage, theme, setTheme }) {
+    // Get initial values from localStorage or default to 'fi' and 'light'
     useEffect(() => {
-        localStorage.setItem("language", language);
-        localStorage.setItem("theme", theme);
+        const savedLanguage = localStorage.getItem("language");
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedLanguage && savedLanguage !== language) {
+            setLanguage(savedLanguage);
+        }
+
+        if (savedTheme && savedTheme !== theme) {
+            setTheme(savedTheme);
+        }
+    }, [setLanguage, setTheme]);
+
+    useEffect(() => {
+        // Only update localStorage if language or theme changes
+        if (language) {
+            localStorage.setItem("language", language);
+        }
+        if (theme) {
+            localStorage.setItem("theme", theme);
+        }
     }, [language, theme]);
 
     const handleLanguageChange = (event) => {

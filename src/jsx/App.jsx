@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Veriarvot from "./Veriarvot";
 import Potilastiedot from "./Potilastiedot";
-import Chattibotti from "./Chattibotti";
 import Asetukset from "./Asetukset";
 import KayntiTiedot from "./KayntiTiedot";
 import ChatWindow from "./Chattibotti";
@@ -33,19 +32,30 @@ function App() {
         localStorage.setItem("theme", theme);
     }, [theme]);
 
+    const menuItems = [
+        { path: "/", label: language === "fi" ? "Koti" : "Home" },
+        {
+            path: "/Veriarvot",
+            label: language === "fi" ? "Veriarvot" : "Blood Values",
+        },
+        {
+            path: "/Potilastiedot",
+            label: language === "fi" ? "Potilastiedot" : "Patient Info",
+        },
+        {
+            path: "/Asetukset",
+            label: language === "fi" ? "Asetukset" : "Settings",
+        },
+    ];
+
     return (
         <div className={`center ${theme}`}>
             <nav>
-                <Link to="/">{language === "fi" ? "Koti" : "Home"}</Link>
-                <Link to="/Veriarvot">
-                    {language === "fi" ? "Veriarvot" : "Blood Values"}
-                </Link>
-                <Link to="/Potilastiedot">
-                    {language === "fi" ? "Potilastiedot" : "Patient Info"}
-                </Link>
-                <Link to="/Asetukset">
-                    {language === "fi" ? "Asetukset" : "Settings"}
-                </Link>
+                {menuItems.map((item) => (
+                    <Link key={item.path} to={item.path}>
+                        {item.label}
+                    </Link>
+                ))}
             </nav>
 
             <Routes>
@@ -58,7 +68,6 @@ function App() {
                     path="/Potilastiedot"
                     element={<Potilastiedot language={language} />}
                 />
-                <Route />
                 <Route
                     path="/Asetukset"
                     element={

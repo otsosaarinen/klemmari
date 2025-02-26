@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import "../css/Veriarvot.css";
 
-function Veriarvot({ language }) {
+// Utility function for debouncing
+const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    React.useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
+
+function Veriarvot({ language = "fi" }) {
+    // Fallback to "fi" if language is not passed
     const columns = [
-        { field: "id", headerName: language === "fi" ? "ID" : "ID", width: 90 },
+        { field: "id", headerName: "ID", width: 90 },
         {
             field: "verikoe",
             headerName: language === "fi" ? "Verikoe" : "Blood Test",
@@ -149,14 +167,27 @@ function Veriarvot({ language }) {
 
     const [rows, setRows] = useState(allRows);
     const [searchTerm, setSearchTerm] = useState("");
+    const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
+
+    // Filter rows based on the debounced search term
+    const filteredRows = useMemo(() => {
+        return allRows.filter((row) => {
+            return (
+                row.verikoe
+                    .toLowerCase()
+                    .includes(debouncedSearchTerm.toLowerCase()) ||
+                row.päivämäärä
+                    .toLowerCase()
+                    .includes(debouncedSearchTerm.toLowerCase()) ||
+                row.viitearvo
+                    .toLowerCase()
+                    .includes(debouncedSearchTerm.toLowerCase())
+            );
+        });
+    }, [debouncedSearchTerm]);
 
     const handleSearch = (event) => {
-        const value = event.target.value.toLowerCase();
-        setSearchTerm(value);
-        const filteredRows = allRows.filter((row) =>
-            row.verikoe.toLowerCase().includes(value)
-        );
-        setRows(filteredRows);
+        setSearchTerm(event.target.value);
     };
 
     return (
@@ -177,7 +208,7 @@ function Veriarvot({ language }) {
             </div>
             <Box className="data-grid-container">
                 <DataGrid
-                    rows={rows}
+                    rows={filteredRows} // Using filtered rows here
                     columns={columns}
                     initialState={{
                         pagination: {

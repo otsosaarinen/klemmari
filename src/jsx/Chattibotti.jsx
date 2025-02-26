@@ -8,8 +8,6 @@ import {
     Message,
     MessageInput,
 } from "@chatscope/chat-ui-kit-react";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import ConfirmationPopup from "./ConfirmationPopup";
 import "../css/Chattibotti.css";
 
@@ -36,16 +34,22 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
         if (pendingAction) {
             const { action, data } = pendingAction;
 
-            if (action === "toggle_theme" && data.theme) {
-                setTheme(data.theme);
-            } else if (action === "toggle_language" && data.language) {
-                setLanguage(data.language);
-            } else if (action === "redirect" && data.url) {
-                navigate(data.url);
+            switch (action) {
+                case "toggle_theme":
+                    if (data.theme) setTheme(data.theme);
+                    break;
+                case "toggle_language":
+                    if (data.language) setLanguage(data.language);
+                    break;
+                case "redirect":
+                    if (data.url) navigate(data.url);
+                    break;
+                default:
+                    break;
             }
-
-            setPendingAction(null);
         }
+
+        setPendingAction(null);
         setShowPopup(false);
     };
 
@@ -71,6 +75,10 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: text }),
             });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch response from the server");
+            }
 
             const data = await response.json();
             console.log(data);
@@ -114,7 +122,10 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
         } catch (error) {
             console.error("Error fetching AI response:", error);
             const errorMessage = {
-                message: "Sorry, something went wrong. Please try again later.",
+                message:
+                    language === "fi"
+                        ? "Pahoittelut, jokin meni pieleen. Yritä myöhemmin uudelleen."
+                        : "Sorry, something went wrong. Please try again later.",
                 sentTime: new Date().toLocaleTimeString(),
                 sender: "AI Bot",
             };
@@ -137,9 +148,9 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
                 <MainContainer>
                     <ChatContainer>
                         <MessageList>
-                            {messages.map((msg, index) => (
+                            {messages.map((msg) => (
                                 <Message
-                                    key={index}
+                                    key={msg.sentTime} // Use unique key based on timestamp
                                     model={msg}
                                     style={{
                                         borderRadius: "10px",
