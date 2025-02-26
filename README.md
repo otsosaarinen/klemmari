@@ -18,13 +18,25 @@
     ```bash
     cp .env.example .env
     ```
-5. Start the Vite development server:
+5. Fill ```.env``` with you own Azure OpenAI & AI Search API keys & endpoints
+    ```bash
+    # Azure OpenAI Configuration
+    AZURE_OPENAI_ENDPOINT=""
+    AZURE_OPENAI_API_KEY=""
+    DEPLOYMENT_NAME=""
+    
+    # Azure Cognitive Search Configuration
+    AZURE_SEARCH_ENDPOINT=""
+    AZURE_SEARCH_KEY=""
+    AZURE_SEARCH_INDEX=""
+    ```
+6. Start the Vite development server:
     ```bash
     npm run dev
     ```
-6. Open another terminal and navigate to the backend directory (if necessary) to start the Python backend:
+7. Open another terminal and navigate to the backend directory (if necessary) to start the Python backend:
    ```bash
-    python src/ownData.py
+    python src/Azure.py
    ```
 
 ## About the Website
