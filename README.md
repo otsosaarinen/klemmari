@@ -30,11 +30,11 @@
     AZURE_SEARCH_KEY=""
     AZURE_SEARCH_INDEX=""
     ```
-6. Start the Vite development server:
+6. Start the Vite development server to access the frontend:
     ```bash
     npm run dev
     ```
-7. Open another terminal and navigate to the backend directory (if necessary) to start the Python backend:
+7. Open another terminal to start the Flask-server:
    ```bash
     python src/Azure.py
    ```
