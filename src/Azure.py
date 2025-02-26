@@ -49,9 +49,6 @@ def chat():
         # Parse the user's question from the request
         data = request.get_json()
         text = data.get("message", "")  # Get the message from the request
-        USE_OWN_DATA = data.get(
-            "usePdfData", False
-        )  # Flag to check if using custom data
 
         with open(
             "src/default_prompt.json",
@@ -69,39 +66,35 @@ def chat():
         ]
 
         # Define the extra_body for Azure Cognitive Search if using own data
-        extra_body = (
-            {
-                "data_sources": [
-                    {
-                        "type": "azure_search",
-                        "parameters": {
-                            "endpoint": azure_search_endpoint,
-                            "index_name": azure_search_index,
-                            "authentication": {
-                                "type": "api_key",  # Using the API key for authentication in Azure Search
-                                "key": azure_search_key,  # Azure Cognitive Search API key
-                            },
+        extra_body = {
+            "data_sources": [
+                {
+                    "type": "azure_search",
+                    "parameters": {
+                        "endpoint": azure_search_endpoint,
+                        "index_name": azure_search_index,
+                        "authentication": {
+                            "type": "api_key",  # Using the API key for authentication in Azure Search
+                            "key": azure_search_key,  # Azure Cognitive Search API key
                         },
-                    }
-                ]
-            }
-            if USE_OWN_DATA
-            else None
-        )
+                    },
+                }
+            ]
+        }
 
         # Make the API call
         response = client.chat.completions.create(
             model=azure_oai_deployment,
-            max_tokens=500,
+            max_tokens=750,
             temperature=0.5,
             messages=messages,
             extra_body=extra_body,  # Include extra_body only if USE_OWN_DATA is True
         )
 
+        print(response)
+
         # Log token usage
-        print(
-            f"Tokens used: {response.usage.total_tokens}\nUse PDF data: {USE_OWN_DATA}"
-        )
+        # print(f"Tokens used: {response.usage.total_tokens}")
 
         # Ensure that the response has 'choices' and the message content
         if response and hasattr(response, "choices") and len(response.choices) > 0:

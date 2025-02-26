@@ -32,10 +32,6 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
     const [pendingAction, setPendingAction] = useState(null);
     const [popupMessage, setPopupMessage] = useState("");
 
-    const handleCheckBoxChange = (event) => {
-        setIsChecked(event.target.checked);
-    };
-
     const handleConfirm = () => {
         if (pendingAction) {
             const { action, data } = pendingAction;
@@ -73,7 +69,7 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
             const response = await fetch("http://localhost:5000/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text, usePdfData: isChecked }),
+                body: JSON.stringify({ message: text }),
             });
 
             const data = await response.json();
@@ -160,16 +156,6 @@ function ChatWindow({ language, setLanguage, theme, setTheme }) {
                     </ChatContainer>
                 </MainContainer>
             </div>
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={isChecked}
-                        onChange={handleCheckBoxChange}
-                    />
-                }
-                label={language === "fi" ? "Käytä PDF dataa" : "Use PDF data"}
-            />
 
             {showPopup && (
                 <ConfirmationPopup
