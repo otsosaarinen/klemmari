@@ -41,3 +41,6 @@
 
 ## About the Website
 Klemmari is a web application designed to simulate a patient information system. The website features an AI-powered chatbot that helps users by answering questions and providing assistance with navigating the site. The AI is powered by the GPT-4o model and is built using a **Retrieval-Augmented Generation (RAG)** architecture, which enhances its ability to retrieve relevant information and generate contextually appropriate responses.
+
+## Known bugs
+Language model has something troubles providing answers to all questions. Finnish works a little better than English when using the page.
