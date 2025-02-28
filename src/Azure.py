@@ -46,6 +46,8 @@ def chat():
             api_version="2024-05-01-preview",
         )
 
+        USE_OWN_DATA = False
+
         # Parse the user's question from the request
         data = request.get_json()
         text = data.get("message", "")  # Get the message from the request
@@ -66,21 +68,25 @@ def chat():
         ]
 
         # Define the extra_body for Azure Cognitive Search if using own data
-        extra_body = {
-            "data_sources": [
-                {
-                    "type": "azure_search",
-                    "parameters": {
-                        "endpoint": azure_search_endpoint,
-                        "index_name": azure_search_index,
-                        "authentication": {
-                            "type": "api_key",  # Using the API key for authentication in Azure Search
-                            "key": azure_search_key,  # Azure Cognitive Search API key
+        extra_body = (
+            {
+                "data_sources": [
+                    {
+                        "type": "azure_search",
+                        "parameters": {
+                            "endpoint": azure_search_endpoint,
+                            "index_name": azure_search_index,
+                            "authentication": {
+                                "type": "api_key",  # Using the API key for authentication in Azure Search
+                                "key": azure_search_key,  # Azure Cognitive Search API key
+                            },
                         },
-                    },
-                }
-            ]
-        }
+                    }
+                ]
+            }
+            if USE_OWN_DATA
+            else None
+        )
 
         # Make the API call
         response = client.chat.completions.create(
