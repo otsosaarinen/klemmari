@@ -19,21 +19,9 @@
    ```bash
    pip install -r requirements.txt
    ```
-5. Create a ```.env``` file in the root directory:
+5. Create a ```.env``` file in the root directory and fill it according to ```.env.example```:
     ```bash
     cp .env.example .env
-    ```
-5. Fill ```.env``` with you own Azure OpenAI & AI Search API keys & endpoints
-    ```bash
-    # Azure OpenAI Configuration
-    AZURE_OPENAI_ENDPOINT=""
-    AZURE_OPENAI_API_KEY=""
-    DEPLOYMENT_NAME=""
-    
-    # Azure Cognitive Search Configuration
-    AZURE_SEARCH_ENDPOINT=""
-    AZURE_SEARCH_KEY=""
-    AZURE_SEARCH_INDEX=""
     ```
 6. Start the Vite development server to access the frontend:
     ```bash
